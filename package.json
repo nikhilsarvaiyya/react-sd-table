@@ -1,6 +1,6 @@
 {
   "name": "react-sd-table",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "React Static and Dynamic Table",
   "keywords": [
     "react",
@@ -9,8 +9,8 @@
     "Dynamic Data",
     "Detail "
   ],
-  "main": "index.js",
-  "module": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
   "files": [
     "dist",
     "README.md"
