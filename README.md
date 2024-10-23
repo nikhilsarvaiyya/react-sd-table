@@ -1,12 +1,16 @@
 ## Installation
 
-npm install react-sd-table
+ ```javascript 
+ npm install react-sd-table
+```
 
 ## Component
 
-<SDTable rows={rows} columns={columns} rowsPerPage={10}order="asc"orderBy="progress"activePage={1}filters={{}}   />
-
-## Rows
+```javascript
+<SDTable rows={rows} columns={columns} rowsPerPage={10} order="asc" orderBy="progress" activePage={1} filters={{}}   />
+```
+## Set Column for Table
+```javascript
 
 columns = [
   { label: "Id", accessor : "id", validation : { type : "number"}, style : {}  , visible: true},
@@ -22,19 +26,20 @@ columns = [
   { label: "Role", accessor: "role", validation : { type : "string"} }
 ]
 
-## Columns
-
-columns = [
+```
+## Add Rows for Table
+```javascript
+rows = [
 {
-    "id": 8,
-    "firstName": "Ava",
+    "id": 1,
+    "firstName": "John",
     "lastName": "Taylor",
-    "salary": 2342,
+    "salary": 4200000,
     "birthDate": "1990-11-30",
     "age": 27,
-    "progress": 2,
-    "gender": "female",
-    "email": "ava.taylor@x.dummyjson.com",
+    "progress": 78,
+    "gender": "male",
+    "email": "john.taylor@json.com",
     "role": "user",
     "image": "https://dummyjson.com/icon/isabellad/128",
     "phone": "+1 458-853-7877",
@@ -45,6 +50,7 @@ columns = [
       }
     ],
     "rowStyle": { "background": "#EF5350" }
-  },...
+  },
+...
 ]
-
+```
