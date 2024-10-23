@@ -1,0 +1,248 @@
+:root{
+	--color: #212121;
+	--bg: #ffffff;
+	--sahdow:#111111;
+	
+	--light-border:#E0E0E0;
+	--dark-border:#212121;
+	
+	--button-bg:#E0E0E0;
+	--button-color:var(--color);
+	--button-disabled:#919191;
+	
+
+	--input-bg:#f5f5f5;
+	--input-color:#212121;
+
+	--heading-bg:#EEEEEE;
+	--heading-color:var(--color);
+	--sub-heading-bg:#ffffff;
+	--sub-heading-color:var(--color);
+
+	--progress-bar : #616161;
+	--progress : #dadada;
+
+	--table-td:#f9f9f9;
+
+	--px-1:1px;
+	--px-2:2px;
+	--px-3:3px;
+	--px-4:4px;
+	--px-5:5px;
+	--px-6:6px;
+	--px-10:10px;
+	--px-15:15px;
+
+}
+
+body,table,tr,td,th,div,span,p,b,strong,label,ul,li,h1,h2,h3,h4,h5,h6,input,button{
+	margin: 0;
+	padding: 0;
+	text-align: left;
+}
+a{
+	text-decoration: none;
+	color: var(--text-color);
+}
+
+body{
+    background-color: var(--bg);
+    color: var(--color);;
+	font-size: 12px;
+	font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+
+.sd-table{
+	width:100%;
+}
+
+.sd-table .sd-header{
+	display: flex;
+	align-items: center;
+  	justify-content: center;
+	background-color: var(--heading-bg);
+	color: var(--heading-color);
+	padding: var(--px-10);
+	
+}
+.sd-table .sd-header h2 {
+	flex:auto
+}
+
+.sd-table .sd-header ul {
+	
+}
+.sd-table .sd-header ul li{
+	display: inline-block;
+	margin: 0 var(--px-2) ;
+	cursor: pointer;
+	padding: var(--px-3);
+	
+}
+.sd-table .sd-header ul li:hover{
+	opacity: 0.7;
+	background-color: var(--bg);	
+}
+.sd-table .sd-header ul li svg{
+	width:20px;
+	height: 20px;
+}
+
+.sd-table table{
+	width:100%;
+	border-collapse: collapse;
+}
+
+.sd-table table tr{
+	
+}
+
+.sd-table table tr th,
+.sd-table table tr td{
+	border: 1px solid var(--light-border);
+	padding: var(--px-5);
+}
+
+table tr:nth-child(odd) {
+	background-color: var(--table-td);
+  }
+
+.sd-table table tr th{
+	background-color: var(--sub-heading-bg);
+	color: var(--sub-heading-color);
+}
+.sd-table table tr th .th-heading{
+	display: flex;
+	align-items: center;
+  	justify-content: center;
+}
+.sd-table table tr th .th-heading label{
+	flex:auto
+}
+.sd-table table tr th .th-heading button{
+	text-align: center;
+	border: none;
+	cursor: pointer;
+	background: transparent;
+}
+.sd-table table tr th .th-heading button:hover{
+	opacity: 0.7;
+}
+
+.sd-table table tr td{
+	
+}
+
+/*--------------- Pagination -------------------*/
+.sd-table .pagination{
+    display: flex;
+	align-items: center;
+  	justify-content: center;
+    border: 1px solid var(--light-border);
+	
+ }
+
+
+ .sd-table .pagination .paginate-page{
+    padding: var(--px-10);
+ }
+ .sd-table .pagination .paginate-row{
+    padding: var(--px-10);
+ }
+
+ .sd-table .pagination .paginate-arrow {
+    flex: auto;
+	text-align: right;
+	padding: var(--px-10);
+ }
+ 
+
+
+ .sd-table .pagination .paginate-arrow li{
+   	margin: 0 var(--px-5);
+   	display: inline-block;
+ }
+
+ .sd-table .pagination .paginate-arrow li button{
+    padding: var(--px-0) var(--px-0);
+   	background-color: transparent;
+	color: var(--button-color);
+	
+	border-radius: 4px;
+	display: inline-block;
+	cursor: pointer;
+	border: 1px solid transparent;
+ }
+ .sd-table .pagination .paginate-arrow li button:hover{
+    border: 1px solid var(--light-border);
+ }
+ .sd-table .pagination .paginate-arrow li button:disabled{
+	background-color: transparent;
+	opacity: 0.7;
+	border: 1px solid transparent;
+ }
+ 
+ .sd-table .pagination .paginate-clear{
+    
+ }
+
+/* -------------------------------------------------------- */
+
+.sd-table input{
+    padding: 8px;
+    border-radius: 4px;
+    width: 100%;
+    border: none;
+    background-color: var(--input-bg);
+    color: var(--input-color);
+	outline: 1px solid var(--input-bg);
+ }
+
+ .sd-table .sorting-color{
+    background: #eee;
+	border-left: 3px solid #eee;
+	border-right: 3px solid #eee;;
+	
+ }
+ .sd-table .remove-sorting-color{
+    background: none;
+ }
+
+ .sd-table .vi-visible{
+    display: none;
+    visibility: hidden;
+ }
+
+ .sd-table .vi-progress{
+    display: flex;
+	align-items: center;
+  	justify-content: center;
+ }
+ .sd-table .vi-progress-bar{
+    background-color: var(--progress); 
+	border:1px solid var(--progress); 
+    width: 100%; 
+    border-radius: 15px; 
+    margin-right:10px;
+
+   
+ }
+ .sd-table .vi-progress-bar p{
+    background-color: var(--progress-bar); 
+    color: var(--color);
+    border-radius: 15px; 
+    line-height: inherit;
+ }
+.sd-table .vi-progress-bar span{
+    flex:auto;
+    text-align: right;
+    font-size: 62%; 
+   
+ }
+
+ .sd-image-avatar{
+	width: 24px;
+	height: 24px;
+}
+
+
