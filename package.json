@@ -1,6 +1,6 @@
 {
   "name": "react-sd-table",
-  "version": "0.1.1",
+  "version": "1.0.0",
   "description": "React Static and Dynamic Table",
   "keywords": [
     "react",
@@ -21,7 +21,6 @@
   },
   "private": false,
   "dependencies": {
-    "-": "^0.0.1",
     "@babel/polyfill": "^7.12.1",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
