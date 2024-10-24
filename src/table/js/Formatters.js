@@ -38,7 +38,7 @@ export function DateFormat(date, validation) {
 }
 
 export function Image(image) {
-  return <img alt={image} title={image} src={image} className='sd-image-avatar'  />
+  return image === "NA" ? "NA" : <img alt={image} title={image} src={image} className='sd-image-avatar'  /> 
 }
 
 export function Boolen(value, validation) {

@@ -61,7 +61,7 @@ function DateFormat(date, validation) {
   return formatted;
 }
 function Image(image) {
-  return /*#__PURE__*/_react.default.createElement("img", {
+  return image === "NA" ? "NA" : /*#__PURE__*/_react.default.createElement("img", {
     alt: image,
     title: image,
     src: image,

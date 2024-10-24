@@ -70,9 +70,9 @@ function convertType(value) {
 function filterRows(rows, filters) {
   if (isEmpty(filters)) return rows;
   return rows.filter(row => {
-    return Object.keys(filters).every(accessor => {
-      const value = row[accessor];
-      const searchValue = filters[accessor];
+    return Object.keys(filters).every(indexKey => {
+      const value = row[indexKey];
+      const searchValue = filters[indexKey];
       if (isString(value)) {
         return toLower(value).includes(toLower(searchValue));
       }
@@ -96,14 +96,16 @@ function sortRows(rows, sort) {
     if (isNil(b[orderBy])) return -1;
     const aLocale = convertType(a[orderBy]);
     const bLocale = convertType(b[orderBy]);
+
+    // if (order === 'asc') {
+    //   return aLocale?.localeCompare(bLocale, 'en', { numeric: isNumber(b[orderBy]) })
+    // } else {
+    //   return bLocale?.localeCompare(aLocale, 'en', { numeric: isNumber(a[orderBy]) })
+    // }
     if (order === 'asc') {
-      return aLocale.localeCompare(bLocale, 'en', {
-        numeric: isNumber(b[orderBy])
-      });
+      return aLocale;
     } else {
-      return bLocale.localeCompare(aLocale, 'en', {
-        numeric: isNumber(a[orderBy])
-      });
+      return bLocale;
     }
   });
 }

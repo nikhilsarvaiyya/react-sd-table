@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.Pagination = void 0;
+require("core-js/modules/es.array.sort.js");
 var _react = _interopRequireDefault(require("react"));
 function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
 /* eslint-disable jsx-a11y/accessible-emoji */
@@ -15,18 +16,21 @@ const Pagination = _ref => {
     rowsPerPage,
     totalPages,
     setActivePage,
-    setSort,
-    setFilters
+    clearAll,
+    passParamstoParents,
+    filters,
+    sort
   } = _ref;
   const beginning = activePage === 1 ? 1 : rowsPerPage * (activePage - 1) + 1;
   const end = activePage === totalPages ? count : beginning + rowsPerPage - 1;
-  const clearAll = () => {
-    setSort({
-      order: 'asc',
-      orderBy: 'id'
+  let actPageCount = count => {
+    setActivePage(count);
+    passParamstoParents({
+      sort: sort,
+      filters: filters,
+      rowsPerPage: rowsPerPage,
+      activePage: count
     });
-    setActivePage(1);
-    setFilters({});
   };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", {
     className: "paginate-page"
@@ -36,7 +40,9 @@ const Pagination = _ref => {
     className: "paginate-arrow"
   }, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("button", {
     disabled: activePage === 1,
-    onClick: () => setActivePage(1)
+    onClick: () => {
+      actPageCount(1);
+    }
   }, /*#__PURE__*/_react.default.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     height: "24px",
@@ -47,7 +53,9 @@ const Pagination = _ref => {
     d: "M440-240 200-480l240-240 56 56-183 184 183 184-56 56Zm264 0L464-480l240-240 56 56-183 184 183 184-56 56Z"
   })))), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("button", {
     disabled: activePage === 1,
-    onClick: () => setActivePage(activePage - 1)
+    onClick: () => {
+      actPageCount(activePage - 1);
+    }
   }, /*#__PURE__*/_react.default.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     height: "24px",
@@ -58,7 +66,9 @@ const Pagination = _ref => {
     d: "M560-240 320-480l240-240 56 56-184 184 184 184-56 56Z"
   })))), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("button", {
     disabled: activePage === totalPages,
-    onClick: () => setActivePage(activePage + 1)
+    onClick: () => {
+      actPageCount(activePage + 1);
+    }
   }, /*#__PURE__*/_react.default.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     height: "24px",
@@ -69,7 +79,9 @@ const Pagination = _ref => {
     d: "M504-480 320-664l56-56 240 240-240 240-56-56 184-184Z"
   })))), /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("button", {
     disabled: activePage === totalPages,
-    onClick: () => setActivePage(totalPages)
+    onClick: () => {
+      actPageCount(totalPages);
+    }
   }, /*#__PURE__*/_react.default.createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     height: "24px",

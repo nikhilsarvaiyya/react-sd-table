@@ -19,8 +19,8 @@
 	--sub-heading-bg:#ffffff;
 	--sub-heading-color:var(--color);
 
-	--progress-bar : #616161;
-	--progress : #dadada;
+	--progress-bar : #c7c7c7;
+	--progress : #e6e6e6;
 
 	--table-td:#f9f9f9;
 
@@ -30,6 +30,9 @@
 	--px-4:4px;
 	--px-5:5px;
 	--px-6:6px;
+	--px-7:7px;
+	--px-8:8px;
+	--px-9:9px;
 	--px-10:10px;
 	--px-15:15px;
 
@@ -100,16 +103,18 @@ body{
 .sd-table table tr th,
 .sd-table table tr td{
 	border: 1px solid var(--light-border);
-	padding: var(--px-5);
+	padding: var(--px-8);
+	
 }
 
-table tr:nth-child(odd) {
+.sd-table table tbody tr:nth-child(odd) {
 	background-color: var(--table-td);
   }
 
 .sd-table table tr th{
 	background-color: var(--sub-heading-bg);
 	color: var(--sub-heading-color);
+	
 }
 .sd-table table tr th .th-heading{
 	display: flex;
@@ -130,7 +135,10 @@ table tr:nth-child(odd) {
 }
 
 .sd-table table tr td{
-	
+  white-space: nowrap; 
+  max-width: 200px; 
+  overflow: hidden;
+  text-overflow: ellipsis; 
 }
 
 /*--------------- Pagination -------------------*/
@@ -175,10 +183,11 @@ table tr:nth-child(odd) {
  }
  .sd-table .pagination .paginate-arrow li button:hover{
     border: 1px solid var(--light-border);
+	opacity: 0.7;
  }
  .sd-table .pagination .paginate-arrow li button:disabled{
 	background-color: transparent;
-	opacity: 0.7;
+	opacity: 0.1;
 	border: 1px solid transparent;
  }
  
@@ -201,8 +210,7 @@ table tr:nth-child(odd) {
  .sd-table .sorting-color{
     background: #eee;
 	border-left: 3px solid #eee;
-	border-right: 3px solid #eee;;
-	
+	border-right: 3px solid #eee;
  }
  .sd-table .remove-sorting-color{
     background: none;
@@ -217,6 +225,7 @@ table tr:nth-child(odd) {
     display: flex;
 	align-items: center;
   	justify-content: center;
+	  min-width: 110px;
  }
  .sd-table .vi-progress-bar{
     background-color: var(--progress); 
@@ -240,9 +249,65 @@ table tr:nth-child(odd) {
    
  }
 
- .sd-image-avatar{
+ .sd-table .sd-image-avatar{
 	width: 24px;
 	height: 24px;
+	border-radius: 500%;
 }
+
+.sd-table .no-data{
+	padding: var(--px-15);
+	display: flex;
+	align-items: center;
+  	justify-content: center;
+	  min-width: 110px;
+}
+
+.sd-table .no-data .reset{
+	flex: auto;
+	text-align: right;
+
+	
+}
+
+.sd-table .no-data .reset button{
+	padding: var(--px-0) var(--px-0);
+    background-color: transparent;
+    color: var(--button-color);
+    border-radius: 4px;
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid transparent;
+}
+
+.sd-table .no-data .reset button:hover{
+	border: 1px solid var(--light-border);
+	opacity: 0.7;
+}
+
+
+.loader{
+	display: table-cell !important;
+	height: 26px;
+}
+
+.loader p{
+	animation-duration: 2s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: placeHolderShimmer;
+    animation-timing-function: linear;
+	height: 6px;
+}
+
+@keyframes placeHolderShimmer{
+    0%{
+        width: 0;
+    }
+    100%{
+        width: 100%;
+    }
+}
+
 
 
