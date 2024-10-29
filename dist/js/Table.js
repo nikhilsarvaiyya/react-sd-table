@@ -35,7 +35,6 @@ const VITable = _ref => {
     props = _objectWithoutProperties(_ref, _excluded);
   let isSorting = props === null || props === void 0 || (_props$options = props.options) === null || _props$options === void 0 ? void 0 : _props$options.filter(f => f.sorting)[0];
   let isSearching = props === null || props === void 0 || (_props$options2 = props.options) === null || _props$options2 === void 0 ? void 0 : _props$options2.filter(f => f.searching)[0];
-  console.log(isSorting === null || isSorting === void 0 ? void 0 : isSorting.sortColumn[0]);
   const [activePage, setActivePage] = (0, _react.useState)(props.activePage || 1);
   const [filters, setFilters] = (0, _react.useState)(props.filters || {});
   const [sort, setSort] = (0, _react.useState)({

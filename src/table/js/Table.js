@@ -10,7 +10,7 @@ const VITable = ({ columns, rows,  totalRecords, ...props} ) => {
   let isSorting = props?.options?.filter(f => f.sorting)[0];
   let isSearching = props?.options?.filter(f => f.searching)[0];
 
-  console.log(isSorting?.sortColumn[0])
+
 
   const [activePage, setActivePage] = useState(props.activePage || 1)
   const [filters, setFilters] = useState(props.filters || {})

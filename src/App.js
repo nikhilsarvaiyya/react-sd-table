@@ -10,7 +10,7 @@ function App() {
   const [totalRecord, setTotalRecord] = useState(0);
 
   const loadRecords =  (params) => {
-    console.log(params)
+
     let limit = params?.rowsPerPage || 5;
     let skip = (params?.activePage  * params?.rowsPerPage ) || 0;
     let order = params?.sort?.order || 'asc';
@@ -18,7 +18,7 @@ function App() {
     let q = params?.filters ? Object.entries(params?.filters) : "";
     let ifQ = q[0]?.length === 2 ? q[0][1] : ""
     let delay = 0
-    console.log()
+
     let url = "https://dummyjson.com/users?"
     let setParams = `q=${ifQ}&limit=${limit}&skip=${skip}&order=${order}&sortBy=${sortBy}}`
     fetch(url+setParams)
@@ -37,7 +37,7 @@ function App() {
     .then(data => {setList(data)});
   }
 
-  console.log(list)
+
   useEffect(() => {
     loadRecords()
   }, []);
