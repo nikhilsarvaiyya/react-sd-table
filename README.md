@@ -6,6 +6,8 @@
 
 ### Component
 ```javascript
+import {SDTable} from 'react-sd-table'
+
 <SDTable 
   rows={users} 
   columns={columns} 
