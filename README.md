@@ -127,3 +127,38 @@ let toolbar = {
 > ToolBar Details
 > **tableHeader** : Disaply Table Header   
 > **tableName** : Set any table name    
+
+#### Actions
+```javascript
+
+let columns = [
+    ...
+    { label: "", indexKey: "actions" }
+]
+```
+```javascript
+let actionsList = [
+   { label: "Download", action : handleDownload },
+   { label: "Delete", action : handleDelete, confirmMsg : "Are you sure to Download?"},
+ ]
+
+<SDTable 
+     ...
+      actions={actionsList}
+/>
+
+const handleDelete = (e,data) =>{
+  console.log(e,data)
+}
+
+ const handleDownload = (e,data) =>{
+   console.log(e,data)
+ }
+```
+
+> [!NOTE]
+> Actions Details  
+> Add new item in column with indexKey as **actions**.   
+> Create the list of items in array. Pass the action list of array in the table **actions={actionsList}**  
+> Add **action** as function to get row details.  
+> **confirmMsg** is help to update to confirmation Message after any action clicked. default **Do you want to {label} this record? "**  
