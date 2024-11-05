@@ -12,6 +12,7 @@ let columns = [
     { label: "Age", indexKey: "age" , validation : { type : "number"} },
     { label: "Progress", indexKey: "progress" , validation : { type : "progress"} , visible: true},
     { label: "Description", indexKey: "description" },
+    { label: "", indexKey: "actions" },
   ]
 
   export default columns

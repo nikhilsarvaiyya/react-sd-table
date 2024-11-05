@@ -77,5 +77,8 @@ let columns = [{
 }, {
   label: "Description",
   indexKey: "description"
+}, {
+  label: "",
+  indexKey: "actions"
 }];
 var _default = exports.default = columns;

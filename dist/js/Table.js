@@ -44,6 +44,7 @@ const VITable = _ref => {
   const [records] = (0, _react.useState)(totalRecords || null);
   const rowsPerPage = props.rowsPerPage || 5;
   const [loading, setLoading] = (0, _react.useState)(false);
+  const [actionsList] = (0, _react.useState)(props.actions);
   const filteredRows = (0, _react.useMemo)(() => (0, _helpers.filterRows)(rows, filters), [rows, filters]);
   const sortedRows = (0, _react.useMemo)(() => (0, _helpers.sortRows)(filteredRows, sort), [filteredRows, sort]);
   let calculatedRows = records ? rows : (0, _helpers.paginateRows)(sortedRows, activePage, rowsPerPage);
@@ -172,6 +173,31 @@ const VITable = _ref => {
     }
     return trBar;
   };
+  const confirmClick = (a, row) => {
+    if (window.confirm((a === null || a === void 0 ? void 0 : a.confirmMsg) || "Do you want to " + (a === null || a === void 0 ? void 0 : a.label) + " this record? ")) {
+      a.action(row);
+    }
+  };
+  const actionItems = row => /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement("div", {
+    className: "popover-div"
+  }, /*#__PURE__*/_react.default.createElement("button", {
+    className: "popover-button"
+  }, /*#__PURE__*/_react.default.createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "24px",
+    viewBox: "0 -960 960 960",
+    width: "24px",
+    fill: "#5f6368"
+  }, /*#__PURE__*/_react.default.createElement("path", {
+    d: "M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"
+  }))), /*#__PURE__*/_react.default.createElement("ul", {
+    className: "popover-item"
+  }, (actionsList === null || actionsList === void 0 ? void 0 : actionsList.length) !== 0 ? actionsList === null || actionsList === void 0 ? void 0 : actionsList.map(a => {
+    return /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("button", {
+      onClick: () => confirmClick(a, row),
+      type: "button"
+    }, a.label));
+  }) : /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("p", null, "No Action Items.")))));
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("div", {
     className: "sd-table"
   }, props !== null && props !== void 0 && (_props$toolbar = props.toolbar) !== null && _props$toolbar !== void 0 && _props$toolbar.tableHeader ? /*#__PURE__*/_react.default.createElement("div", {
@@ -278,15 +304,16 @@ const VITable = _ref => {
       onChange: event => handleSearch(event.target.value, column.indexKey)
     }) : "");
   })) : ""), /*#__PURE__*/_react.default.createElement("tbody", null, calculatedRows === null ? tdLooper() : calculatedRows === null || calculatedRows === void 0 ? void 0 : calculatedRows.map((row, i) => {
+    var _columns$filter, _columns$filter2;
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i
-    }, columns === null || columns === void 0 ? void 0 : columns.map(column => {
+    }, columns === null || columns === void 0 || (_columns$filter = columns.filter(f => f.indexKey !== 'actions')) === null || _columns$filter === void 0 ? void 0 : _columns$filter.map(column => {
       if ((column === null || column === void 0 ? void 0 : column.visible) === false) {
         return null;
       }
       setSortColor(row, column);
       return loading ? progressLoading : formatData(row[column.indexKey], row, column);
-    }));
+    }), (columns === null || columns === void 0 || (_columns$filter2 = columns.filter(f => f.indexKey === 'actions')) === null || _columns$filter2 === void 0 ? void 0 : _columns$filter2.length) === 1 ? actionItems(row) : null);
   }))), !loading && count === 0 ? /*#__PURE__*/_react.default.createElement("div", {
     className: "no-data"
   }, /*#__PURE__*/_react.default.createElement("div", null, "No data found."), /*#__PURE__*/_react.default.createElement("div", {

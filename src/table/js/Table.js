@@ -20,6 +20,8 @@ const VITable = ({ columns, rows,  totalRecords, ...props} ) => {
   const rowsPerPage = props.rowsPerPage || 5
   const [loading, setLoading] = useState(false)
 
+  const [actionsList] = useState(props.actions)
+
   const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
   const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
   let calculatedRows = records ? rows : paginateRows(sortedRows, activePage, rowsPerPage)
@@ -143,6 +145,24 @@ const VITable = ({ columns, rows,  totalRecords, ...props} ) => {
     }
     return trBar
   }  
+
+
+  const confirmClick = (a, row) => {
+    if (window.confirm(a?.confirmMsg || "Do you want to " + a?.label + " this record? ")) {
+      a.action(row)
+    }
+  }
+
+  const actionItems = (row) => <td>
+  <div className='popover-div'>
+    <button className="popover-button">
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg>
+    </button>
+    <ul className='popover-item'>
+      {actionsList?.length !== 0 ? actionsList?.map((a) => { return <li><button onClick={()=>confirmClick(a, row)} type='button'>{a.label}</button></li>}) : <li><p>No Action Items.</p></li>}
+    </ul>
+  </div>
+</td>
   
   return (
     <>
@@ -232,13 +252,14 @@ const VITable = ({ columns, rows,  totalRecords, ...props} ) => {
             {calculatedRows === null ? tdLooper() : calculatedRows?.map((row, i) => {
               return (
                 <tr key={i}>
-                  {columns?.map((column) => {
+                  {columns?.filter(f => f.indexKey !== 'actions')?.map((column) => {
                     if (column?.visible === false) {
                       return null
                     }
                     setSortColor(row, column)
                     return loading ? progressLoading :  formatData(row[column.indexKey], row, column)
                   })}
+                  {columns?.filter(f => f.indexKey === 'actions')?.length === 1 ?  actionItems(row) : null}
                 </tr>
               )
             })}

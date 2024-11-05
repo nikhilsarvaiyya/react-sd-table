@@ -299,6 +299,50 @@ body{
     animation-timing-function: linear;
 	height: 6px;
 }
+.popover-div{
+	position: relative;
+	
+
+}
+.popover-div .popover-button{
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+.popover-div .popover-button:hover + .popover-item,
+.popover-div .popover-item:hover{
+	display: block;
+}
+.popover-div .popover-item{
+	position: fixed;
+	display: none;
+	width: 200px;
+	z-index: 999;
+	overflow: auto;
+	margin: -34px -0 0 -200px;
+	border: 1px solid #ccc;
+	background: white;
+	border-radius: 4px;
+
+}
+.popover-div .popover-item li{
+	list-style: none;
+	border-bottom: 1px solid #ccc;
+}
+.popover-div .popover-item li p{
+	padding: 10px;
+}
+.popover-div .popover-item li button{
+	cursor: pointer;
+	width: 100%;
+	border: none;
+	padding: 10px;
+	background: transparent;
+}
+.popover-div .popover-item li button:hover{
+	opacity: 0.7;
+}
+
 
 @keyframes placeHolderShimmer{
     0%{

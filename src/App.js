@@ -46,14 +46,27 @@ function App() {
   let options = [
       {
         sorting: true,
-        sortColumn : [1,2,3,4,5,6,7,9,10,12],
+        sortColumn : [5],
         sortOrder : 'asc',
         sortBy : 'id'
       },
       {
         searching: true,
-        searchColumn : [1,2,3,4,5,6,7,8,9,10,12],
+        searchColumn : [1],
       }
+  ]
+
+  const handleDelete = (e,data) =>{
+    console.log(e,data)
+  }
+
+  const handleDownload = (e,data) =>{
+    console.log(e,data)
+  }
+
+  let actions = [
+    { label: "Download", action : handleDownload, confirmMsg : "Are you sure to Download?" },
+    { label: "Delete", action : handleDelete},
   ]
 
   let toolbar = {
@@ -63,16 +76,16 @@ function App() {
       download:true, 
       print: true, 
       refresh:true 
-    }
+  }
 
 
   return <SDTable 
       rows={users} 
       columns={columns} 
       loadRecords={loadRecords}
-     
       options={options}
       toolbar={toolbar}
+      actions={actions}
   />;
 }
 
