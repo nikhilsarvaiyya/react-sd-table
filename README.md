@@ -189,7 +189,7 @@ const handleDelete = (e,data) =>{
   />
 ```
 
-### UI variant as Table, List and card
+### View records like Table, List or card
 ```javascript
 <SDTable
    ...
