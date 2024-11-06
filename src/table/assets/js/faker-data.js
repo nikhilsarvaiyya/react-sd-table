@@ -14,7 +14,7 @@ export function createRandomUser() {
     role : faker.person.jobDescriptor(),
     image : faker.image.avatar(),
     phone : faker.phone.number(),
-    description: faker.lorem.sentence({ min: 5, max: 300 }),
+    description: faker.lorem.sentence({ min: 5, max: 10 }),
   };
 }
 

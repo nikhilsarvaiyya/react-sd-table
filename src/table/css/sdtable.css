@@ -118,6 +118,8 @@ body {
 .sd-table table {
 	width: 100%;
 	border-collapse: collapse;
+	overflow: auto;
+	width:100%;
 }
 
 .sd-table table tr {}
@@ -126,7 +128,6 @@ body {
 .sd-table table tr td {
 	border: 1px solid var(--light-border);
 	padding: var(--px-8);
-
 }
 
 .sd-table table tbody tr:nth-child(odd) {
@@ -161,11 +162,11 @@ body {
 }
 
 .sd-table table tr td {
-	white-space: nowrap;
+	/* white-space: nowrap;
 	max-width: 200px;
 
 	overflow: hidden;
-	text-overflow: ellipsis;
+	text-overflow: ellipsis; */
 }
 
 .sd-table table.list tr .filter-tr {
@@ -486,3 +487,17 @@ body {
 	
 	align-items: center;
   }
+
+  /* Scroller Bar */
+
+ .sd-table .scroll-bar::-webkit-scrollbar {
+	width: 5px;
+	height: 8px;
+	background-color: #f5f5f5; /* or add it to the track */
+  }
+  
+  /* Add a thumb */
+.sd-table .scroll-bar::-webkit-scrollbar-thumb {
+	background: #cccccc;
+	border-radius: 30px;
+}

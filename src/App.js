@@ -47,13 +47,13 @@ function App() {
   let options = [
       {
         sorting: true,
-        sortColumn : [5],
+        sortColumn : [0,1,2,3,4,5,6,7,8,9,10,11,12,13],
         sortOrder : 'asc',
         sortBy : 'id'
       },
       {
         searching: true,
-        searchColumn : [1],
+        searchColumn : [0,1,2,3,4,5,6,7,8,9,10,11,12,13]
       }
   ]
 

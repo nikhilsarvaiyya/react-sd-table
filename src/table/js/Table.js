@@ -202,7 +202,7 @@ const VITable = ({ columns, rows,  totalRecords, ...props} ) => {
         </div>
          : "" }
 
-        <table className={props.display}>
+        <table className={`table scroll-bar ${props.display}`}>
           <thead>
             <tr>
               {columns?.map((column, i) => {
@@ -229,7 +229,8 @@ const VITable = ({ columns, rows,  totalRecords, ...props} ) => {
                   <th key={column.indexKey}>
                     <div className='th-heading' >
                       <label>{column.label} </label>
-                      <button onClick={() => handleSort(column.indexKey)}>{isSorting && isSorting?.sortColumn?.includes(i) ? sortIcon() : ""}</button>
+                      {column.indexKey !== "actions" ? <button onClick={() => handleSort(column.indexKey)}>{isSorting && isSorting?.sortColumn?.includes(i) ? sortIcon() : ""}</button> : ""}
+                      
                     </div>
                   </th>
                 )
@@ -237,7 +238,7 @@ const VITable = ({ columns, rows,  totalRecords, ...props} ) => {
             </tr>
             {isSearching ? 
             <tr>
-              {columns?.map((column, i) => {
+              {columns?.filter(f => f.indexKey !== "actions")?.map((column, i) => {
                 if (column?.visible === false) {
                   return null
                 }
