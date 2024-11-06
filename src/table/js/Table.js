@@ -8,19 +8,22 @@ import { saveAsJson, PrintPdf } from './widgets/download';
 const VITable = ({ columns, rows,  totalRecords, ...props} ) => {
 
   let isSorting = props?.options?.filter(f => f.sorting)[0];
-  let isSearching = props?.options?.filter(f => f.searching)[0];
+
 
 
 
   const [activePage, setActivePage] = useState(props.activePage || 1)
   const [filters, setFilters] = useState(props.filters || {})
   const [sort, setSort] = useState({ order: isSorting?.sortOrder || 'asc', orderBy: isSorting?.sortBy || columns[0]?.indexKey })
-  const [records] = useState(totalRecords || null)
- 
-  const rowsPerPage = props.rowsPerPage || 5
+  const [records, setRecords] = useState(totalRecords || null)
+  const [rowsPerPage, setRowsInPage] = useState(props.rowsPerPage || 5)
+  const [rowsPerPageDropdown, setRowsPerPageDropdown] = useState(props.rowsPerPageDropdown || [5,10,20,50,100])
+  
   const [loading, setLoading] = useState(false)
 
-  const [actionsList] = useState(props.actions)
+  const [actionsList, setActionList] = useState(props.actions)
+
+  let isSearching = props?.options?.filter(f => f.searching)[0];
 
   const filteredRows = useMemo(() => filterRows(rows, filters), [rows, filters])
   const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort])
@@ -29,7 +32,7 @@ const VITable = ({ columns, rows,  totalRecords, ...props} ) => {
   let totalPages = Math.ceil((records || count ) / rowsPerPage)
 
   const stopLoader = () => {
-    setLoading(true)
+    setLoading(true) 
     setTimeout(() => {
       setLoading(false)
     }, 500);
@@ -116,7 +119,12 @@ const VITable = ({ columns, rows,  totalRecords, ...props} ) => {
       tdStyle = isStyleAvailable?.style
     }
 
-    return <td className={`${row.sortColorClass}`} style={{ ...localStyle, ...row.rowStyle, ...column?.style, ...tdStyle }} key={column.indexKey}>{setValue}</td>
+    return <td className={`${row.sortColorClass} `} style={{ ...localStyle, ...row.rowStyle, ...column?.style, ...tdStyle }} key={column.indexKey}>
+      <span className='td-table'>{setValue}</span>
+      <div className="td-card">
+        {setValue}
+      </div>
+    </td>
   }
 
   let setSortColor = (row, column) => {
@@ -141,7 +149,7 @@ const VITable = ({ columns, rows,  totalRecords, ...props} ) => {
       for (let i = 0; i < columns.length; i++) {
         tdBar.push(progressLoading)
       }
-      trBar.push(<tr>{tdBar}</tr>)
+      trBar.push(<tr key={i}>{tdBar}</tr>)
     }
     return trBar
   }  
@@ -153,7 +161,7 @@ const VITable = ({ columns, rows,  totalRecords, ...props} ) => {
     }
   }
 
-  const actionItems = (row) => <td>
+  const actionItems = (row) => <td className='action-row'>
   <div className='popover-div'>
     <button className="popover-button">
       <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg>
@@ -194,7 +202,7 @@ const VITable = ({ columns, rows,  totalRecords, ...props} ) => {
         </div>
          : "" }
 
-        <table >
+        <table className={props.display}>
           <thead>
             <tr>
               {columns?.map((column, i) => {
@@ -234,7 +242,7 @@ const VITable = ({ columns, rows,  totalRecords, ...props} ) => {
                   return null
                 }
                 return (
-                  <th key={i} style={{padding:"4px"}}>
+                  <th key={i} className='filter-tr' >
                     {isSearching?.searchColumn.includes(i) ? 
                     <input
                       key={`${column.indexKey}-search`}
@@ -288,6 +296,8 @@ const VITable = ({ columns, rows,  totalRecords, ...props} ) => {
               passParamstoParents={passParamstoParents}
               sort={sort}
               filters={filters}
+              setRowsInPage={setRowsInPage}
+              rowsPerPageDropdown={rowsPerPageDropdown}
             />  : "" }   
         </div> 
       </div>

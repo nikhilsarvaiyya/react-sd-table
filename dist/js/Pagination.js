@@ -1,12 +1,15 @@
 "use strict";
 
+require("core-js/modules/es.weak-map.js");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.Pagination = void 0;
 require("core-js/modules/es.array.sort.js");
-var _react = _interopRequireDefault(require("react"));
-function _interopRequireDefault(e) { return e && e.__esModule ? e : { default: e }; }
+require("core-js/modules/web.dom-collections.iterator.js");
+var _react = _interopRequireWildcard(require("react"));
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 /* eslint-disable jsx-a11y/accessible-emoji */
 
 const Pagination = _ref => {
@@ -19,8 +22,11 @@ const Pagination = _ref => {
     clearAll,
     passParamstoParents,
     filters,
-    sort
+    sort,
+    setRowsInPage,
+    rowsPerPageDropdown
   } = _ref;
+  const [selectRow, setSelectedRow] = (0, _react.useState)(rowsPerPage);
   const beginning = activePage === 1 ? 1 : rowsPerPage * (activePage - 1) + 1;
   const end = activePage === totalPages ? count : beginning + rowsPerPage - 1;
   let actPageCount = count => {
@@ -32,11 +38,27 @@ const Pagination = _ref => {
       activePage: count
     });
   };
+  let updateRowPerPage = e => {
+    setActivePage(1);
+    setSelectedRow(Number(e.target.value));
+    setRowsInPage(Number(e.target.value));
+    passParamstoParents({
+      sort: sort,
+      filters: filters,
+      rowsPerPage: Number(e.target.value),
+      activePage: count
+    });
+  };
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement("p", {
     className: "paginate-page"
   }, "Page ", activePage, " of ", totalPages), /*#__PURE__*/_react.default.createElement("p", {
     className: "paginate-row"
-  }, "Rows: ", beginning === end ? end : "".concat(beginning, " - ").concat(end), " of ", count), /*#__PURE__*/_react.default.createElement("ul", {
+  }, "Rows: ", beginning === end ? end : "".concat(beginning, " - ").concat(end), " of  ", /*#__PURE__*/_react.default.createElement("select", {
+    value: selectRow,
+    onChange: updateRowPerPage
+  }, rowsPerPageDropdown.map(i => /*#__PURE__*/_react.default.createElement("option", {
+    value: i
+  }, i)))), /*#__PURE__*/_react.default.createElement("ul", {
     className: "paginate-arrow"
   }, /*#__PURE__*/_react.default.createElement("li", null, /*#__PURE__*/_react.default.createElement("button", {
     disabled: activePage === 1,

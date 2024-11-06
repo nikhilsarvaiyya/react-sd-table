@@ -19,7 +19,7 @@ export function createRandomUser() {
 }
 
 export const users = faker.helpers.multiple(createRandomUser, {
-  count: 100,
+  count: 500,
 });
 
 export const fakeDesc = faker.lorem.sentence({ min: 5, max: 300 })

@@ -26,7 +26,7 @@ function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = 
 function _objectWithoutProperties(e, t) { if (null == e) return {}; var o, r, i = _objectWithoutPropertiesLoose(e, t); if (Object.getOwnPropertySymbols) { var s = Object.getOwnPropertySymbols(e); for (r = 0; r < s.length; r++) o = s[r], t.includes(o) || {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]); } return i; }
 function _objectWithoutPropertiesLoose(r, e) { if (null == r) return {}; var t = {}; for (var n in r) if ({}.hasOwnProperty.call(r, n)) { if (e.includes(n)) continue; t[n] = r[n]; } return t; }
 const VITable = _ref => {
-  var _props$options, _props$options2, _columns$, _props$toolbar, _props$toolbar2, _props$toolbar3, _props$toolbar4, _props$toolbar5, _props$toolbar6;
+  var _props$options, _columns$, _props$options2, _props$toolbar, _props$toolbar2, _props$toolbar3, _props$toolbar4, _props$toolbar5, _props$toolbar6;
   let {
       columns,
       rows,
@@ -34,17 +34,18 @@ const VITable = _ref => {
     } = _ref,
     props = _objectWithoutProperties(_ref, _excluded);
   let isSorting = props === null || props === void 0 || (_props$options = props.options) === null || _props$options === void 0 ? void 0 : _props$options.filter(f => f.sorting)[0];
-  let isSearching = props === null || props === void 0 || (_props$options2 = props.options) === null || _props$options2 === void 0 ? void 0 : _props$options2.filter(f => f.searching)[0];
   const [activePage, setActivePage] = (0, _react.useState)(props.activePage || 1);
   const [filters, setFilters] = (0, _react.useState)(props.filters || {});
   const [sort, setSort] = (0, _react.useState)({
     order: (isSorting === null || isSorting === void 0 ? void 0 : isSorting.sortOrder) || 'asc',
     orderBy: (isSorting === null || isSorting === void 0 ? void 0 : isSorting.sortBy) || ((_columns$ = columns[0]) === null || _columns$ === void 0 ? void 0 : _columns$.indexKey)
   });
-  const [records] = (0, _react.useState)(totalRecords || null);
-  const rowsPerPage = props.rowsPerPage || 5;
+  const [records, setRecords] = (0, _react.useState)(totalRecords || null);
+  const [rowsPerPage, setRowsInPage] = (0, _react.useState)(props.rowsPerPage || 5);
+  const [rowsPerPageDropdown, setRowsPerPageDropdown] = (0, _react.useState)(props.rowsPerPageDropdown || [5, 10, 20, 50, 100]);
   const [loading, setLoading] = (0, _react.useState)(false);
-  const [actionsList] = (0, _react.useState)(props.actions);
+  const [actionsList, setActionList] = (0, _react.useState)(props.actions);
+  let isSearching = props === null || props === void 0 || (_props$options2 = props.options) === null || _props$options2 === void 0 ? void 0 : _props$options2.filter(f => f.searching)[0];
   const filteredRows = (0, _react.useMemo)(() => (0, _helpers.filterRows)(rows, filters), [rows, filters]);
   const sortedRows = (0, _react.useMemo)(() => (0, _helpers.sortRows)(filteredRows, sort), [filteredRows, sort]);
   let calculatedRows = records ? rows : (0, _helpers.paginateRows)(sortedRows, activePage, rowsPerPage);
@@ -141,10 +142,14 @@ const VITable = _ref => {
       tdStyle = isStyleAvailable === null || isStyleAvailable === void 0 ? void 0 : isStyleAvailable.style;
     }
     return /*#__PURE__*/_react.default.createElement("td", {
-      className: "".concat(row.sortColorClass),
+      className: "".concat(row.sortColorClass, " "),
       style: _objectSpread(_objectSpread(_objectSpread(_objectSpread({}, localStyle), row.rowStyle), column === null || column === void 0 ? void 0 : column.style), tdStyle),
       key: column.indexKey
-    }, setValue);
+    }, /*#__PURE__*/_react.default.createElement("span", {
+      className: "td-table"
+    }, setValue), /*#__PURE__*/_react.default.createElement("div", {
+      className: "td-card"
+    }, setValue));
   };
   let setSortColor = (row, column) => {
     if (sort.orderBy === column.indexKey) {
@@ -169,7 +174,9 @@ const VITable = _ref => {
       for (let i = 0; i < columns.length; i++) {
         tdBar.push(progressLoading);
       }
-      trBar.push(/*#__PURE__*/_react.default.createElement("tr", null, tdBar));
+      trBar.push(/*#__PURE__*/_react.default.createElement("tr", {
+        key: i
+      }, tdBar));
     }
     return trBar;
   };
@@ -178,7 +185,9 @@ const VITable = _ref => {
       a.action(row);
     }
   };
-  const actionItems = row => /*#__PURE__*/_react.default.createElement("td", null, /*#__PURE__*/_react.default.createElement("div", {
+  const actionItems = row => /*#__PURE__*/_react.default.createElement("td", {
+    className: "action-row"
+  }, /*#__PURE__*/_react.default.createElement("div", {
     className: "popover-div"
   }, /*#__PURE__*/_react.default.createElement("button", {
     className: "popover-button"
@@ -240,7 +249,9 @@ const VITable = _ref => {
     fill: "#5f6368"
   }, /*#__PURE__*/_react.default.createElement("path", {
     d: "M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z"
-  }))) : "")) : "", /*#__PURE__*/_react.default.createElement("table", null, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, columns === null || columns === void 0 ? void 0 : columns.map((column, i) => {
+  }))) : "")) : "", /*#__PURE__*/_react.default.createElement("table", {
+    className: props.display
+  }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, columns === null || columns === void 0 ? void 0 : columns.map((column, i) => {
     var _isSorting$sortColumn;
     if ((column === null || column === void 0 ? void 0 : column.visible) === false) {
       return null;
@@ -292,9 +303,7 @@ const VITable = _ref => {
     }
     return /*#__PURE__*/_react.default.createElement("th", {
       key: i,
-      style: {
-        padding: "4px"
-      }
+      className: "filter-tr"
     }, isSearching !== null && isSearching !== void 0 && isSearching.searchColumn.includes(i) ? /*#__PURE__*/_react.default.createElement("input", {
       key: "".concat(column.indexKey, "-search"),
       type: "search",
@@ -339,7 +348,9 @@ const VITable = _ref => {
     clearAll: clearAll,
     passParamstoParents: passParamstoParents,
     sort: sort,
-    filters: filters
+    filters: filters,
+    setRowsInPage: setRowsInPage,
+    rowsPerPageDropdown: rowsPerPageDropdown
   }) : "")));
 };
 var _default = exports.default = VITable;

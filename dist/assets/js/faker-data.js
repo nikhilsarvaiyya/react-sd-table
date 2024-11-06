@@ -40,7 +40,7 @@ function createRandomUser() {
   };
 }
 const users = exports.users = _faker.faker.helpers.multiple(createRandomUser, {
-  count: 100
+  count: 500
 });
 const fakeDesc = exports.fakeDesc = _faker.faker.lorem.sentence({
   min: 5,

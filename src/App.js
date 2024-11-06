@@ -8,10 +8,17 @@ import { fakeDesc, users } from "./table/assets/js/faker-data";
 function App() {
   const [list, setList] = useState(null);
   const [totalRecord, setTotalRecord] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+
+  useEffect(() => {
+    loadRecords()
+   
+  }, []);
 
   const loadRecords =  (params) => {
 
-    let limit = params?.rowsPerPage || 5;
+    let limit = params?.rowsPerPage || rowsPerPage;
     let skip = (params?.activePage  * params?.rowsPerPage ) || 0;
     let order = params?.sort?.order || 'asc';
     let sortBy = params?.sort?.orderBy || 'id';
@@ -24,7 +31,7 @@ function App() {
     fetch(url+setParams)
     .then(res => res.json())
     .then((data) => {
-      setTotalRecord(data.total)
+        setTotalRecord(data.total)
         return data?.users.map(m => {
         m.city = m.address.city;
         m.progress = Math.floor(Math.random() * 101)
@@ -36,12 +43,6 @@ function App() {
     })
     .then(data => {setList(data)});
   }
-
-
-  useEffect(() => {
-    loadRecords()
-  }, []);
-
 
   let options = [
       {
@@ -82,10 +83,14 @@ function App() {
   return <SDTable 
       rows={users} 
       columns={columns} 
-      loadRecords={loadRecords}
+      // loadRecords={loadRecords}
+      // totalRecords={totalRecord}
       options={options}
       toolbar={toolbar}
       actions={actions}
+      rowsPerPage={rowsPerPage}
+      rowsPerPageDropdown={[5,10,15,20]}
+
   />;
 }
 
