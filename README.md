@@ -178,4 +178,30 @@ const handleDelete = (e,data) =>{
 > Add new item in column with indexKey as **actions**.   
 > Create the list of items in array. Pass the action list of array in the table **actions={actionsList}**  
 > Add **action** as function to get row details.  
-> **confirmMsg** is help to update to confirmation Message after any action clicked. default **Do you want to {label} this record? "**  
+> **confirmMsg** is help to update to confirmation Message after any action clicked. default **Do you want to {label} this record? "**
+
+### Row per page and Dropdown count of rows per page
+```javascript
+<SDTable 
+     ...
+     rowsPerPage={10}
+     rowsPerPageDropdown={[5,10,15,20]}
+  />
+```
+
+### UI variant as Table, List and card
+```javascript
+<SDTable
+   ...
+   display="list"
+/>
+<SDTable
+   ...
+   display="card"
+/>
+```
+
+> [!NOTE]
+> Display Style  
+> You can use display proerty to display table like **list** of item or **card** view   
+> Default view is Table. use **list** || **card** to update the view   
