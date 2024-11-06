@@ -91,13 +91,13 @@ rows = [
 let options = [
    {
      sorting: true,
-     sortColumn : [1,2,3,4,5,6,7,9,10,12],
+     sortColumn : [1,2,3],
      sortOrder : 'asc',
      sortBy : 'id'
    },
    {
      searching: true,
-     searchColumn : [1,2,3,4,5,6,7,8,9,10,12],
+     searchColumn : [3,4,7],
    }
 ]
 ```
