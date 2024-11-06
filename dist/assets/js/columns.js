@@ -19,11 +19,28 @@ let columns = [{
   },
   style: {},
   visible: true
-},
-// { label: "Role", indexKey: "role", validation : { type : "string"} },
-// { label: "Name", indexKey: "firstName", validation : { type : "string"}, visible: true },
-// { label: "city", indexKey: "city" , validation : { type : "String", prepand : ""} , visible: true},
-{
+}, {
+  label: "Role",
+  indexKey: "role",
+  validation: {
+    type: "string"
+  }
+}, {
+  label: "Name",
+  indexKey: "firstName",
+  validation: {
+    type: "string"
+  },
+  visible: true
+}, {
+  label: "city",
+  indexKey: "city",
+  validation: {
+    type: "String",
+    prepand: ""
+  },
+  visible: true
+}, {
   label: "Email",
   indexKey: "email",
   validation: {

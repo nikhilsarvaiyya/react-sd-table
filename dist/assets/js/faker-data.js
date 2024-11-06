@@ -35,7 +35,7 @@ function createRandomUser() {
     phone: _faker.faker.phone.number(),
     description: _faker.faker.lorem.sentence({
       min: 5,
-      max: 300
+      max: 10
     })
   };
 }

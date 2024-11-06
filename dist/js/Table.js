@@ -26,7 +26,7 @@ function _toPrimitive(t, r) { if ("object" != typeof t || !t) return t; var e = 
 function _objectWithoutProperties(e, t) { if (null == e) return {}; var o, r, i = _objectWithoutPropertiesLoose(e, t); if (Object.getOwnPropertySymbols) { var s = Object.getOwnPropertySymbols(e); for (r = 0; r < s.length; r++) o = s[r], t.includes(o) || {}.propertyIsEnumerable.call(e, o) && (i[o] = e[o]); } return i; }
 function _objectWithoutPropertiesLoose(r, e) { if (null == r) return {}; var t = {}; for (var n in r) if ({}.hasOwnProperty.call(r, n)) { if (e.includes(n)) continue; t[n] = r[n]; } return t; }
 const VITable = _ref => {
-  var _props$options, _columns$, _props$options2, _props$toolbar, _props$toolbar2, _props$toolbar3, _props$toolbar4, _props$toolbar5, _props$toolbar6;
+  var _props$options, _columns$, _props$options2, _props$toolbar, _props$toolbar2, _props$toolbar3, _props$toolbar4, _props$toolbar5, _props$toolbar6, _columns$filter;
   let {
       columns,
       rows,
@@ -250,7 +250,7 @@ const VITable = _ref => {
   }, /*#__PURE__*/_react.default.createElement("path", {
     d: "M480-160q-134 0-227-93t-93-227q0-134 93-227t227-93q69 0 132 28.5T720-690v-110h80v280H520v-80h168q-32-56-87.5-88T480-720q-100 0-170 70t-70 170q0 100 70 170t170 70q77 0 139-44t87-116h84q-28 106-114 173t-196 67Z"
   }))) : "")) : "", /*#__PURE__*/_react.default.createElement("table", {
-    className: props.display
+    className: "table scroll-bar ".concat(props.display)
   }, /*#__PURE__*/_react.default.createElement("thead", null, /*#__PURE__*/_react.default.createElement("tr", null, columns === null || columns === void 0 ? void 0 : columns.map((column, i) => {
     var _isSorting$sortColumn;
     if ((column === null || column === void 0 ? void 0 : column.visible) === false) {
@@ -294,10 +294,10 @@ const VITable = _ref => {
       key: column.indexKey
     }, /*#__PURE__*/_react.default.createElement("div", {
       className: "th-heading"
-    }, /*#__PURE__*/_react.default.createElement("label", null, column.label, " "), /*#__PURE__*/_react.default.createElement("button", {
+    }, /*#__PURE__*/_react.default.createElement("label", null, column.label, " "), column.indexKey !== "actions" ? /*#__PURE__*/_react.default.createElement("button", {
       onClick: () => handleSort(column.indexKey)
-    }, isSorting && isSorting !== null && isSorting !== void 0 && (_isSorting$sortColumn = isSorting.sortColumn) !== null && _isSorting$sortColumn !== void 0 && _isSorting$sortColumn.includes(i) ? sortIcon() : "")));
-  })), isSearching ? /*#__PURE__*/_react.default.createElement("tr", null, columns === null || columns === void 0 ? void 0 : columns.map((column, i) => {
+    }, isSorting && isSorting !== null && isSorting !== void 0 && (_isSorting$sortColumn = isSorting.sortColumn) !== null && _isSorting$sortColumn !== void 0 && _isSorting$sortColumn.includes(i) ? sortIcon() : "") : ""));
+  })), isSearching ? /*#__PURE__*/_react.default.createElement("tr", null, columns === null || columns === void 0 || (_columns$filter = columns.filter(f => f.indexKey !== "actions")) === null || _columns$filter === void 0 ? void 0 : _columns$filter.map((column, i) => {
     if ((column === null || column === void 0 ? void 0 : column.visible) === false) {
       return null;
     }
@@ -313,16 +313,16 @@ const VITable = _ref => {
       onChange: event => handleSearch(event.target.value, column.indexKey)
     }) : "");
   })) : ""), /*#__PURE__*/_react.default.createElement("tbody", null, calculatedRows === null ? tdLooper() : calculatedRows === null || calculatedRows === void 0 ? void 0 : calculatedRows.map((row, i) => {
-    var _columns$filter, _columns$filter2;
+    var _columns$filter2, _columns$filter3;
     return /*#__PURE__*/_react.default.createElement("tr", {
       key: i
-    }, columns === null || columns === void 0 || (_columns$filter = columns.filter(f => f.indexKey !== 'actions')) === null || _columns$filter === void 0 ? void 0 : _columns$filter.map(column => {
+    }, columns === null || columns === void 0 || (_columns$filter2 = columns.filter(f => f.indexKey !== 'actions')) === null || _columns$filter2 === void 0 ? void 0 : _columns$filter2.map(column => {
       if ((column === null || column === void 0 ? void 0 : column.visible) === false) {
         return null;
       }
       setSortColor(row, column);
       return loading ? progressLoading : formatData(row[column.indexKey], row, column);
-    }), (columns === null || columns === void 0 || (_columns$filter2 = columns.filter(f => f.indexKey === 'actions')) === null || _columns$filter2 === void 0 ? void 0 : _columns$filter2.length) === 1 ? actionItems(row) : null);
+    }), (columns === null || columns === void 0 || (_columns$filter3 = columns.filter(f => f.indexKey === 'actions')) === null || _columns$filter3 === void 0 ? void 0 : _columns$filter3.length) === 1 ? actionItems(row) : null);
   }))), !loading && count === 0 ? /*#__PURE__*/_react.default.createElement("div", {
     className: "no-data"
   }, /*#__PURE__*/_react.default.createElement("div", null, "No data found."), /*#__PURE__*/_react.default.createElement("div", {

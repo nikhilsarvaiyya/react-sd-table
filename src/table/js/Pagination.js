@@ -25,7 +25,7 @@ export const Pagination = ({ activePage, count, rowsPerPage, totalPages, setActi
           Page {activePage} of {totalPages}
         </p>
         <p className="paginate-row">
-          Rows: {beginning === end ? end : `${beginning} - ${end}`} of  <select value={selectRow} onChange={updateRowPerPage}>
+          Rows: {beginning === end ? end : `${beginning} - ${end}`} of  <select value={selectRow} onChange={updateRowPerPage} style={{padding:"4px 2px 4px 4px"}}>
             {rowsPerPageDropdown.map(i => <option value={i}>{i}</option>)}
           </select>
         </p>

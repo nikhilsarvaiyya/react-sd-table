@@ -55,7 +55,10 @@ const Pagination = _ref => {
     className: "paginate-row"
   }, "Rows: ", beginning === end ? end : "".concat(beginning, " - ").concat(end), " of  ", /*#__PURE__*/_react.default.createElement("select", {
     value: selectRow,
-    onChange: updateRowPerPage
+    onChange: updateRowPerPage,
+    style: {
+      padding: "4px 2px 4px 4px"
+    }
   }, rowsPerPageDropdown.map(i => /*#__PURE__*/_react.default.createElement("option", {
     value: i
   }, i)))), /*#__PURE__*/_react.default.createElement("ul", {
