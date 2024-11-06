@@ -10,11 +10,7 @@ import {SDTable} from 'react-sd-table'
 
 <SDTable 
   rows={users} 
-  columns={columns} 
-  loadRecords={loadRecords}
-  totalRecords={totalRecord}
-  options={options}
-  toolbar={toolbar}
+  columns={columns}
 />
 
 ```
@@ -106,6 +102,14 @@ let options = [
 ]
 ```
 
+### Component
+```javascript
+<SDTable 
+ ...
+ options={options}
+/>
+```
+
 > [!NOTE]
 > Row Detail for SD Table  
 > **Sorting** : Sorting will allow to show sort icon in all table head. If we need specific coloum sorting so set **sortColumn** with number of column started with 0 ans seprated by comma. **sortOrder** will set **asc** or **desc** order of the column and **sortBy** will allow to sort that specific column at first.    
@@ -122,7 +126,13 @@ let toolbar = {
    refresh:true 
 }
 ```
-
+### Component
+```javascript
+<SDTable 
+ ...
+ toolbar={toolbar}
+/>
+```
 > [!NOTE]
 > ToolBar Details
 > **tableHeader** : Disaply Table Header   
@@ -131,22 +141,29 @@ let toolbar = {
 #### Actions
 ```javascript
 
+let actionsList = [
+   { label: "Download", action : handleDownload },
+   { label: "Delete", action : handleDelete, confirmMsg : "Are you sure to Download?"},
+ ]
+ 
+
+```
+### Component
+```javascript
+<SDTable 
+ ...
+ actions={actionsList}
+/>
+```
+### New colum item
+```javascript
 let columns = [
     ...
     { label: "", indexKey: "actions" }
 ]
 ```
+### Callback Function for row
 ```javascript
-let actionsList = [
-   { label: "Download", action : handleDownload },
-   { label: "Delete", action : handleDelete, confirmMsg : "Are you sure to Download?"},
- ]
-
-<SDTable 
-     ...
-      actions={actionsList}
-/>
-
 const handleDelete = (e,data) =>{
   console.log(e,data)
 }
