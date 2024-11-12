@@ -5,6 +5,9 @@
 ```
 
 ### Component
+> [!IMPORTANT]
+> **Static Data**
+> Avoid setting **totalRecords** if you are using static list. just pass  **rows** and **columns** for static list. You can also use **options** and **toolbar** feature for static data.
 ```javascript
 import {SDTable} from 'react-sd-table'
 
@@ -15,14 +18,22 @@ import {SDTable} from 'react-sd-table'
 
 ```
 > [!IMPORTANT]
-> **Static Data**
-> Avoid setting **totalRecords** if you are using static list. just pass  **rows** and **columns** for static list. You can also use **options** and **toolbar** feature for static data.
-
-> [!IMPORTANT]
 > **Dynamic Data**   
 > For dynamic Data set two porps      
 > **loadRecords** : loadRecords(**params**). params object contain the local default or updated setting in the table.       
 > **totalRecords** : set the total record number.   
+
+```javascript
+import {SDTable} from 'react-sd-table'
+
+<SDTable 
+  rows={users} 
+  columns={columns}
+  loadRecords={loadRecords}
+  totalRecords={totalRecords}
+/>
+
+```
 
 #### Set Column for Table
 ```javascript
