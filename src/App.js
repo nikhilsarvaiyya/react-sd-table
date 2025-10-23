@@ -15,7 +15,7 @@ function App() {
     loadRecords()
    
   }, []);
-
+  console.log("list",list);
   const loadRecords =  (params) => {
 
     let limit = params?.rowsPerPage || rowsPerPage;
